@@ -1,2 +1,3 @@
-# advent-of-code-go
-The greatest challenges in the most mid language
+# ADVENT OF CODE
+## Golang
+> The greatest challenges in the most mid language
