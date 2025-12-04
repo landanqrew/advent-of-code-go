@@ -12,12 +12,13 @@ import (
 func main() {
 	aoc.LoadEnv(".env")
 	// aoc.UpdateInputs(".env")
-	data, err := aoc.GetInput(2025, 2, ".env")
+	data, err := aoc.GetInput(2025, 3, ".env")
 	if err != nil {
 		log.Fatalf("failed to get input: %v", err)
 	}
 	start := time.Now()
-	year2025.Day2Part2(string(data))
+	year2025.Day3Part1(string(data))
+	year2025.Day3Part2(string(data))
 	end := time.Now()
 	fmt.Printf("time taken: %s\n", end.Sub(start).String())
 }

@@ -3,6 +3,7 @@ package files
 import (
 	"encoding/json"
 	"fmt"
+	"log"
 )
 
 
@@ -22,4 +23,12 @@ func EncodeJsonTypeToBytes[T any](v T) ([]byte, error) {
 		return nil, fmt.Errorf("failed to marshal json: %w", err)
 	}
 	return bytes, nil
+}
+
+func PrintJsonType[T any](v T) {
+	bytes, err := EncodeJsonTypeToBytes(v)
+	if err != nil {
+		log.Fatalf("failed to encode json: %v", err)
+	}
+	fmt.Println(string(bytes))
 }
