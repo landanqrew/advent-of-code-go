@@ -1,7 +1,9 @@
 package main
 
 import (
+	"fmt"
 	"log"
+	"time"
 
 	"github.com/landanqrew/advent-of-code-go/internal/aoc"
 	"github.com/landanqrew/advent-of-code-go/internal/year2025"
@@ -9,9 +11,13 @@ import (
 
 func main() {
 	aoc.LoadEnv(".env")
-	data, err := aoc.GetInput(2025, 1, ".env")
+	// aoc.UpdateInputs(".env")
+	data, err := aoc.GetInput(2025, 2, ".env")
 	if err != nil {
 		log.Fatalf("failed to get input: %v", err)
 	}
-	year2025.Day1(string(data))
+	start := time.Now()
+	year2025.Day2Part2(string(data))
+	end := time.Now()
+	fmt.Printf("time taken: %s\n", end.Sub(start).String())
 }
