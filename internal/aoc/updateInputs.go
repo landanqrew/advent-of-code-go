@@ -2,6 +2,7 @@ package aoc
 
 import (
 	"fmt"
+	"log"
 	"os"
 	"time"
 
@@ -36,4 +37,17 @@ func UpdateInputs(envPath string) ([]byte, error) {
 	}
 	fmt.Println("inputs updated")
 	return nil, nil
+}
+
+func UpdateInputForDay(year int, day int, envPath string)  {
+	input, err := GetInput(year, day, envPath)
+	if err != nil {
+		log.Fatalf("failed to get input for year %d, day %d: %v", year, day, err)
+	}
+	padDay := fmt.Sprintf("%02d", day)
+	err = files.WriteFile(fmt.Sprintf("input/%d/day_%s.txt", year, padDay), input)
+	if err != nil {
+		log.Fatalf("failed to write input for year %d, day %d: %v", year, day, err)
+	}
+	fmt.Printf("input for year %d, day %d updated", year, day)
 }

@@ -16,3 +16,8 @@ func GetNumbers(input string) []string {
 	pattern := `\d+`
 	return GetMatchedGroups(pattern, input)
 }
+
+func GetOperators(input string) []string {
+	pattern := `[*+-/]`
+	return GetMatchedGroups(pattern, input)
+}

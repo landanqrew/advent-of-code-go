@@ -2,6 +2,7 @@ package files
 
 import (
 	"fmt"
+	"log"
 	"os"
 	"path/filepath"
 )
@@ -22,4 +23,13 @@ func WriteFile(path string, bytes []byte) error {
 		return fmt.Errorf("failed to write file: %w", err)
 	}
 	return nil
+}
+
+func GetInputFromFile(year int, day int) string {
+	path := fmt.Sprintf("input/%d/day_%02d.txt", year, day)
+	bytes, err := ReadFile(path)
+	if err != nil {
+		log.Fatalf("failed to read input file for year %d, day %d: %v", year, day, err)
+	}
+	return string(bytes)
 }
