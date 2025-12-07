@@ -150,7 +150,7 @@ func solveMathProblemsPart2(mathProblems []mathProblem) int {
 	return total
 }
 
-func Day6Part1(data string) {
+func Day6(data string) {
 	if data == "" {
 		data = getExampleDay6Example()
 	}

@@ -17,7 +17,7 @@ func main() {
 	fmt.Println(data[0])
 	start := time.Now()
 	// year2025.Day4Part1("")
-	year2025.Day6Part1(data)
+	year2025.Day6(data)
 	end := time.Now()
 	fmt.Printf("time taken: %s\n", end.Sub(start).String())
 }
