@@ -16,7 +16,7 @@ func main() {
 	data := files.GetInputFromFile(2025, 7)
 	fmt.Println(data[0])
 	start := time.Now()
-	year2025.Day7Part1("")
+	year2025.Day7("")
 	end := time.Now()
 	fmt.Printf("time taken: %s\n", end.Sub(start).String())
 }
