@@ -162,11 +162,11 @@ func getSplitters(data string) *day7Node {
 	return nil
 }
 
-func Day7Part1(data string) {
+func Day7(data string) {
 	if data == "" {
 		data = getDay7Part1Example()
 	}
 	head := getSplitters(data)
 	fmt.Printf("2025 Day 7 Part 1: %d\n", head.CountUniqueChildren(make(map[*day7Node]bool)))
-	fmt.Println(head.CountPermutations(make(map[*day7Node]int)) - 1)
+	fmt.Printf("2025 Day 7 Part 2: %d\n", head.CountPermutations(make(map[*day7Node]int)) - 1)
 }
