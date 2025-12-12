@@ -135,7 +135,7 @@ func Day8(data string, cycleLimit int) {
 	circuits := make([]*Day8Circuit, 0)
 	added := make(map[*Day8Vector3D]int)
 	for i, v := range vectorDistances {
-		if i == cycleLimit {
+		if i == /*cycleLimit*/ 1000 {
 			break
 		}
 		// fmt.Printf("v: (%d, %d, %d) - (%d, %d, %d)\n", v.V1.X, v.V1.Y, v.V1.Z, v.V2.X, v.V2.Y, v.V2.Z)
@@ -144,16 +144,16 @@ func Day8(data string, cycleLimit int) {
 		v2 := v.V2
 		v1ok, v2ok := checkVectorMapMembership(v1, added), checkVectorMapMembership(v2, added)
 		if !v1ok && !v2ok {
-			fmt.Printf("adding new circuit: %d for v: (%d, %d, %d) - (%d, %d, %d)\n", len(circuits), v.V1.X, v.V1.Y, v.V1.Z, v.V2.X, v.V2.Y, v.V2.Z)
+			// fmt.Printf("adding new circuit: %d for v: (%d, %d, %d) - (%d, %d, %d)\n", len(circuits), v.V1.X, v.V1.Y, v.V1.Z, v.V2.X, v.V2.Y, v.V2.Z)
 			circuits = append(circuits, createDay8Circuit(v))
 			added[v1] = len(circuits) - 1
 			added[v2] = len(circuits) - 1
 		} else if v1ok && !v2ok {
-			fmt.Printf("adding v2 (%d, %d, %d) to circuit: %d\n", v2.X, v2.Y, v2.Z, added[v1])
+			// fmt.Printf("adding v2 (%d, %d, %d) to circuit: %d\n", v2.X, v2.Y, v2.Z, added[v1])
 			circuits[added[v1]].AddVector(v2)
 			added[v2] = added[v1]
 		} else if !v1ok && v2ok {
-			fmt.Printf("adding v1 (%d, %d, %d) to from distance (%d, %d, %d) - (%d, %d, %d) circuit: %d\n", v1.X, v1.Y, v1.Z, v2.X, v2.Y, v2.Z, v.V1.X, v.V1.Y, v.V1.Z, added[v2])
+			// fmt.Printf("adding v1 (%d, %d, %d) to from distance (%d, %d, %d) - (%d, %d, %d) circuit: %d\n", v1.X, v1.Y, v1.Z, v2.X, v2.Y, v2.Z, v.V1.X, v.V1.Y, v.V1.Z, added[v2])
 			circuits[added[v2]].AddVector(v1)
 			added[v1] = added[v2]
 		} else if v1ok && v2ok && added[v1] != added[v2] {
@@ -191,37 +191,19 @@ func Day8(data string, cycleLimit int) {
 			// Clear the source circuit (optional, but keeps things clean)
 			sourceCircuit.Vectors = make(map[*Day8Vector3D]bool)
 			sourceCircuit.Count = 0
-		}
 
-		/*for i, circuit := range circuits {
-			fmt.Printf("checking circuit: %d\n", i)
-			if circuit.checkMembership(v1) {
-				add = false
-				if circuits[i].checkMembership(v2) {
-					added[v2] = i
-					// fmt.Printf("v2 (%d, %d, %d) already in circuit: %d\n", v2.X, v2.Y, v2.Z, i)
-					break
+			validCircuits := 0
+			for _, circuit := range circuits {
+				if len(circuit.Vectors) > 0 {
+					validCircuits++
 				}
-				fmt.Printf("adding v2 (%d, %d, %d) to circuit: %d\n", v2.X, v2.Y, v2.Z, i)
-				circuits[i].AddVector(v2)
-				break
-			} else if circuit.checkMembership(v2) {
-				add = false
-				if circuits[i].checkMembership(v1) {
-					added[v1] = true
-					// fmt.Printf("v1 (%d, %d, %d) already in circuit: %d\n", v1.X, v1.Y, v1.Z, i)
-					break
-				}
-				fmt.Printf("adding v1 (%d, %d, %d) to circuit: %d\n", v1.X, v1.Y, v1.Z, i)
-				circuits[i].AddVector(v1)
+			}
+			if validCircuits == 1 {
+				fmt.Printf("LAST MERGE: (%d, %d, %d) - (%d, %d, %d)\n", v1.X, v1.Y, v1.Z, v2.X, v2.Y, v2.Z)
+				fmt.Println("part2 result: ", v1.X*v2.X)
 				break
 			}
 		}
-		if add {
-			fmt.Printf("adding new circuit: %d for v: (%d, %d, %d) - (%d, %d, %d)\n", len(circuits), v.V1.X, v.V1.Y, v.V1.Z, v.V2.X, v.V2.Y, v.V2.Z)
-			circuits = append(circuits, createDay8Circuit(v))
-		}
-		*/
 
 	}
 

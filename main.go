@@ -12,11 +12,11 @@ import (
 func main() {
 	aoc.LoadEnv(".env")
 	// aoc.UpdateInputs(".env")
-	aoc.UpdateInputForDay(2025, 8, ".env")
-	data := files.GetInputFromFile(2025, 8)
+	aoc.UpdateInputForDay(2025, 9, ".env")
+	data := files.GetInputFromFile(2025, 9)
 	fmt.Println(data[0])
 	start := time.Now()
-	year2025.Day8(data, 1000)
+	year2025.Day9Part1(data)
 	end := time.Now()
 	fmt.Printf("time taken: %s\n", end.Sub(start).String())
 }
